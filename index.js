@@ -1,4 +1,5 @@
 const { Command } = require("commander");
+require("colors");
 
 const {
   addContact,
@@ -23,19 +24,41 @@ const argv = program.opts();
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
-      listContacts().then(list => console.table(list));
+      listContacts()
+        .then((list) => {
+          console.log("\n", " Table with contact list: ".bgGreen, "\n");
+          console.table(list);
+        })
+        .catch((e) => console.error(e));
       break;
 
     case "get":
-       getContactById(id).then(contact => console.table(contact));
+      getContactById(id)
+        .then((contact) => {
+          console.log("\n", ` Contact with id ${id} `.bgMagenta, "\n");
+          console.table(contact);
+        })
+        .catch((e) => console.error(e));
       break;
 
     case "add":
-      addContact(name, email, phone).then((list) => console.table(list));
+      addContact(name, email, phone)
+        .then((list) => {
+          console.log(
+            "\n",
+            ` List of contacts with new contact `.bgYellow,
+            "\n"
+          );
+          console.table(list);
+        })
+        .catch((e) => console.error(e));
       break;
 
     case "remove":
-      removeContact(id).then((list) => console.table(list));
+          removeContact(id).then((contact) => {
+              console.log("\n", ` Removed contact `.bgRed, "\n");
+              console.table(contact)
+          });
       break;
 
     default:

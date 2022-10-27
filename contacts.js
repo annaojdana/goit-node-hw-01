@@ -31,6 +31,11 @@ const removeContact = async (id) => {
   try {
     const list = await listContacts();
 
+    const removedContact = JSON.stringify(
+      list.filter((c) => Number(c.id) === Number(id)),
+      null,
+      2
+    );
     const contactsListWithoutDeleteContact = JSON.stringify(
       list.filter((c) => Number(c.id) !== Number(id)),
       null,
@@ -39,7 +44,7 @@ const removeContact = async (id) => {
 
     await fs.writeFile(contactsPath, contactsListWithoutDeleteContact);
 
-    return await listContacts();
+    return removeContact;
   } catch (error) {
     console.log(error);
   }
