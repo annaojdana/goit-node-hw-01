@@ -33,11 +33,7 @@ const removeContact = async (id) => {
   try {
     const list = await listContacts();
 
-    const removedContact = JSON.stringify(
-      list.filter((c) => Number(c.id) === Number(id)),
-      null,
-      2
-    );
+    const removedContact = list.filter((c) => Number(c.id) === Number(id));
 
     const contactsListWithoutDeleteContact = JSON.stringify(
       list.filter((c) => Number(c.id) !== Number(id)),
@@ -52,7 +48,6 @@ const removeContact = async (id) => {
     console.log(error);
   }
 };
-
 
 const addContact = async (name, email, phone) => {
   try {

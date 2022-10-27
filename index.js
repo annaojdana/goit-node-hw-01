@@ -20,7 +20,7 @@ program.parse(process.argv);
 
 const argv = program.opts();
 
-// TODO: refaktor
+
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
@@ -56,7 +56,7 @@ function invokeAction({ action, id, name, email, phone }) {
 
     case "remove":
           removeContact(id).then((contact) => {
-              console.log("\n", ` Removed contact `.bgRed, "\n");
+              console.log("\n", ` Removed contact: `.bgRed, "\n");
               console.table(contact)
           });
       break;
