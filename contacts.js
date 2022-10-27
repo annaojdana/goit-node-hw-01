@@ -16,6 +16,7 @@ const listContacts = async () => {
     console.log(error);
   }
 };
+
 const getContactById = async (id) => {
   try {
     const list = JSON.parse(await fs.readFile(contactsPath, "utf8"));
@@ -27,6 +28,7 @@ const getContactById = async (id) => {
     console.log(error);
   }
 };
+
 const removeContact = async (id) => {
   try {
     const list = await listContacts();
@@ -36,6 +38,7 @@ const removeContact = async (id) => {
       null,
       2
     );
+
     const contactsListWithoutDeleteContact = JSON.stringify(
       list.filter((c) => Number(c.id) !== Number(id)),
       null,
@@ -44,11 +47,13 @@ const removeContact = async (id) => {
 
     await fs.writeFile(contactsPath, contactsListWithoutDeleteContact);
 
-    return removeContact;
+    return removedContact;
   } catch (error) {
     console.log(error);
   }
 };
+
+
 const addContact = async (name, email, phone) => {
   try {
     const list = await listContacts();
